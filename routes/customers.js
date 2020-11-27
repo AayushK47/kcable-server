@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const controller = require('../controller/customers')
 
-router.get('/api/customers/', controller.fetchAllCustomers);
-router.post('/api/customers/', controller.createCustomer);
+router.get('/customers/', controller.fetchAllCustomers);
+router.post('/customers/', controller.createCustomer);
 
 module.exports = router
