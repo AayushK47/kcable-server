@@ -14,12 +14,20 @@ const CustomerSchema = mongoose.Schema({
     },
     address: {
         type: String,
-        required: true
+        required: true,
+        lowercase: true
     },
     area: {
         type: String,
-        required: true
-    }
+        required: true,
+        lowercase: true
+    },
+    connections: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Connections'
+        }
+    ]
 });
 
 const Customer = mongoose.model('Customer', CustomerSchema);

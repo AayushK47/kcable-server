@@ -10,7 +10,13 @@ async function create(model, queryQata) {
     return data;
 }
 
+async function createMany(model, queryData){
+    const data = await model.insertMany(queryData);
+    return data;
+}
+
 module.exports = {
     create,
-    readAll
+    readAll,
+    createMany
 }
