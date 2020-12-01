@@ -27,10 +27,17 @@ async function update(model, filter, doc){
     return data;
 }
 
+async function deleteOneById(model, id) {
+    const data = await model.findByIdAndDelete(id);
+
+    return data;
+}
+
 module.exports = {
     create,
     readAll,
     createMany,
     update,
-    readOneById
+    readOneById,
+    deleteOneById
 }

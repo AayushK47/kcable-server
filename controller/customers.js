@@ -59,8 +59,24 @@ async function updateCustomer(req, res) {
     });
 }
 
+async function deleteCustomerConnection(req, res){
+
+    await crud.deleteOneById(Connections, req.params.connectionId)
+
+    let customer = await Customer.findById(req.params.customerId);
+
+    customer.connections = customer.connections.filter(x => x.toString() !== req.params.connectionId);
+
+    customer.save();
+
+    res.json({
+        message: "got it"
+    });
+}
+
 module.exports = {
     fetchAllCustomers,
     createCustomer,
-    updateCustomer
+    updateCustomer,
+    deleteCustomerConnection
 }
