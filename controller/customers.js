@@ -29,8 +29,6 @@ async function createCustomer(req, res) {
 }
 
 async function updateCustomer(req, res) {
-    console.log(req.params.id);
-    console.log(req.body);
     var newConnections = [];
 
     if(req.body.connections.length > 0){
@@ -50,8 +48,6 @@ async function updateCustomer(req, res) {
     customer.connections = [...customer.connections, ...newConnections];
 
     const data = await customer.save();
-
-    console.log(`data: ${data}`);
 
     res.status(204).json({
         message: "Update successful",

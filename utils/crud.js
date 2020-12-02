@@ -3,7 +3,12 @@ async function readOneById(model, id, populateArg) {
     
     return data;
 }
+async function readOne(model, filter){
+    const data = await model.findOne(filter);
 
+    return data;
+
+}
 async function readAll(model, populateArg) {
     const data = await model.find({}).populate(populateArg);
     
@@ -39,5 +44,6 @@ module.exports = {
     createMany,
     update,
     readOneById,
-    deleteOneById
+    deleteOneById,
+    readOne
 }
