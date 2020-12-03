@@ -3,7 +3,7 @@ const { Customer } = require('../model/Customer');
 const { Connections } = require('../model/Connections');
 
 async function fetchAllCustomers(req, res) {
-    const data = await crud.readAll(Customer, 'connections');
+    const data = await crud.readAll(Customer, {operator: req.userData._id}, 'connections');
     
     res.json(data);
 }
@@ -14,6 +14,7 @@ async function createCustomer(req, res) {
         data = data.map(e => e._id);
 
         req.body.connections = data;
+        req.body.operator = req.userData._id;
         data = await crud.create(Customer, req.body);
         
         res.status(201).json({
@@ -21,10 +22,10 @@ async function createCustomer(req, res) {
             data: data
         });
     } catch(e) {
+        console.log(e);
         if(e.code === 11000) {
-            res.json({message: "DUplicate data received. Cannot save the Customer", data: null});
+            res.json({message: "Duplicate data received. Cannot save the Customer", data: null});
         }
-        
     }
 }
 

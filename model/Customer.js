@@ -27,7 +27,12 @@ const CustomerSchema = mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Connections'
         }
-    ]
+    ],
+    operator: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
+    }
 });
 
 const Customer = mongoose.model('Customer', CustomerSchema);

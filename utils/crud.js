@@ -1,5 +1,5 @@
 async function readOneById(model, id, populateArg) {
-    const data = await model.findById({}).populate(populateArg);
+    const data = await model.findById(id).populate(populateArg);
     
     return data;
 }
@@ -9,8 +9,8 @@ async function readOne(model, filter){
     return data;
 
 }
-async function readAll(model, populateArg) {
-    const data = await model.find({}).populate(populateArg);
+async function readAll(model,filter, populateArg) {
+    const data = await model.find(filter).populate(populateArg);
     
     return data;
 }
