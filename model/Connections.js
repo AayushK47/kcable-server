@@ -13,7 +13,13 @@ const ConnectionsSchema = mongoose.Schema({
     monthly_amt: {
         type: Number,
         required: true
-    }
+    },
+    payments: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Payments'
+        }
+    ]
 });
 
 const Connections = mongoose.model('Connections', ConnectionsSchema);

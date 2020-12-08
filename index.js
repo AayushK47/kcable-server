@@ -7,12 +7,14 @@ require('dotenv').config();
 const { auth } = require('./middleware/auth');
 const customerRouter = require('./routes/customers');
 const authRouter = require('./routes/auth');
+const paymentsRouter = require('./routes/payments');
 
 app.use(bodyParser.json());
 app.use(cors());
 app.use(authRouter);
 app.use(auth);
 app.use(customerRouter);
+app.use(paymentsRouter);
 
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,

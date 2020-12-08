@@ -1,0 +1,22 @@
+const mongoose = require('mongoose');
+
+const PaymentSchema = mongoose.Schema({
+    amount: {
+        type: Number,
+        required: true
+    },
+    payment_date: {
+        type: Date,
+        required: true
+    },
+    due_date: {
+        type: Date,
+        required: true
+    }
+});
+
+const Payments = mongoose.model('Payments', PaymentSchema);
+
+module.exports = {
+    Payments
+}
