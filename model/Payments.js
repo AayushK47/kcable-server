@@ -6,11 +6,11 @@ const PaymentSchema = mongoose.Schema({
         required: true
     },
     payment_date: {
-        type: Date,
+        type: String,
         required: true
     },
     due_date: {
-        type: Date,
+        type: String,
         required: true
     }
 });
