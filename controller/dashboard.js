@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Customer } = require('../model/Customer');
 
 async function getCustomersWithDuedate(req, res) {
-    const docs = await Customer.aggregate([
+    let docs = await Customer.aggregate([
         { $match:  { operator: mongoose.Types.ObjectId(req.userData._id) } },
         { $lookup: {
             from: 'connections',
@@ -40,6 +40,8 @@ async function getCustomersWithDuedate(req, res) {
             doc.due_date = doc.due_date[doc.due_date.length - 1]
         }
     }
+
+    docs = docs.filter(x => x.payment_date.length > 0);
 
     res.json({
         message: "got here",
