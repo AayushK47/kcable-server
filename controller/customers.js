@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const crud = require('../utils/crud');
 const { Customer } = require('../model/Customer');
 const { Connections } = require('../model/Connections');
@@ -27,6 +28,31 @@ async function createCustomer(req, res) {
             res.json({message: "Duplicate data received. Cannot save the Customer", data: null});
         }
     }
+}
+
+async function customerDetails(req, res) {
+    console.log(req.params.id);
+    const data = await Customer.aggregate([
+        { $match: { _id:  mongoose.Types.ObjectId(req.params.id) } },
+        {
+            $lookup: {
+                from: 'connections',
+                localField: 'connections',
+                foreignField: '_id',
+                as: 'connections'
+            }
+        },
+        {
+            $lookup: {
+                from: 'payments',
+                localField: 'connections.payments',
+                foreignField: '_id',
+                as: 'payments'
+            }
+        }
+    ]);
+
+    res.json(data);
 }
 
 async function updateCustomer(req, res) {
@@ -75,5 +101,6 @@ module.exports = {
     fetchAllCustomers,
     createCustomer,
     updateCustomer,
-    deleteCustomerConnection
+    deleteCustomerConnection,
+    customerDetails
 }
